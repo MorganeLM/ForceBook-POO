@@ -23,6 +23,29 @@ class UserManager {
 	}
 
 	/**
+	*	Create an user in the database
+	*/
+	public function createUser(User $user) {
+		
+		$stmt = $this->pdo->prepare('INSERT INTO `user`(`name`, `email`) VALUES (:name, :email)');
+		$stmt->bindValue(':name', $user->getName(), PDO::PARAM_STR);
+		$stmt->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
+		$stmt->execute();
+
+		$user->setId($this->pdo->lastInsertId());
+	}
+
+	/**
+	*	Delete an user in the database =>>> le faire en tout objet
+	*/
+	public function deleteUser(User $user) {
+		
+		$stmt = $this->pdo->prepare('DELETE FROM `user` WHERE id = :id');
+		$stmt->bindValue(':id', $user->getId($user), PDO::PARAM_INT);
+		$stmt->execute();
+	}
+
+	/**
 	*	Update an user in the database
 	*/
 	public function updateUser(User $user) {

@@ -10,6 +10,23 @@
     <title><?= $title ?></title>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.php">ForceBook</a>
+
+
+  <div class="navbar" >
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" href="index.php?ctrl=user&action=index">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.php?ctrl=post&action=index">Posts</a>
+      </li>
+      
+  </div>
+</nav>
+
 <div class="container py-4">
     <?= $content ?>
 </div>

@@ -25,6 +25,10 @@ ob_start();
                             <a href="index.php?ctrl=user&action=edit&id=<?= $user->getId() ?>" class="btn btn-primary">
                                 Edit
                             </a>
+                        
+                            <a href="index.php?ctrl=user&action=delete&id=<?= $user->getId() ?>" class="btn btn-danger">
+                                Delete
+                            </a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -32,7 +36,9 @@ ob_start();
             </table>
         </div>
     </div>
+    <a href="index.php?ctrl=user&action=create" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add an user</a>
 </div>
+
 <?php
 $content = ob_get_clean();
 require __DIR__ . '/../template.php';

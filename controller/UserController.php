@@ -18,7 +18,22 @@ class UserController {
 	*	Display a form to create an user and save it in database
 	*/
 	public function create() {
+		
+		
+		//Form has been submitted
+		if(isset($_POST['name']) && isset($_POST['email'])) {
+			$user = new User();
+			//3b. Check the validity of datas
+			$user->setName($_POST['name']);
+			$user->setEmail($_POST['email']);
+			$userManager = new UserManager();
+			$userManager->createUser($user);
 
+			header('Location: index.php?ctrl=user&action=index');
+		}
+
+		//3. Display the form
+		require __DIR__ . '/../view/user/create.php';
 	}
 
 	/**
@@ -36,6 +51,8 @@ class UserController {
 			$user->setName($_POST['name']);
 			$user->setEmail($_POST['email']);
 			$userManager->updateUser($user);
+
+			header('Location: index.php?ctrl=user&action=index');
 		}
 
 		//2. Prepare the form
@@ -50,6 +67,13 @@ class UserController {
 	*	Delete the user in the database
 	*/
 	public function delete() {
-		
+		$id = $_GET['id'] ?? null;
+		$userManager = new UserManager();
+		$user = $userManager->getUser($id);
+		if(isset($user)){
+			$userManager->deleteUser($user);
+			header('Location: index.php?ctrl=user&action=index');
+		}
 	}
+
 }
